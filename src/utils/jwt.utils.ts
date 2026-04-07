@@ -1,20 +1,17 @@
 import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
 
-const configService = new ConfigService<IENV, true>()
-const APPLICATION_KEY = configService.get('APP_KEY', {infer: true});
-
-export function createJwtToken(data: object, expiresIn = '1d') {
-  const token = jwt.sign(data, APPLICATION_KEY, {
+export function createJwtToken(data: object, appKey: string, expiresIn = '1d') {
+  const token = jwt.sign(data, appKey, {
     expiresIn,
   });
 
   return token;
 }
 
-export function decodeJwtToken(token: string) {
+export function decodeJwtToken(token: string, appKey: string) {
   try {
-    const data = jwt.verify(token, APPLICATION_KEY);
+    const data = jwt.verify(token, appKey);
     return data;
   } catch (error) {
     return false;

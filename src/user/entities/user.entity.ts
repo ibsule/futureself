@@ -1,4 +1,9 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -20,6 +25,9 @@ export class User {
   @Column()
   password_hash: string;
 
+  @Column({ default: 1 })
+  auth_token_version: number;
+
   @CreateDateColumn()
-  created_at: Date
+  created_at: Date;
 }

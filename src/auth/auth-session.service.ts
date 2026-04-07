@@ -30,8 +30,11 @@ export class AuthSessionService {
 
   async get(user_id: string) {
     try {
-      const result = await this.authSessionRepository.findOneBy({
-        user_id,
+      const result = await this.authSessionRepository.findOne({
+        where: { user_id },
+        order: {
+          created_at: 'DESC',
+        },
       });
       return result;
     } catch (error) {
