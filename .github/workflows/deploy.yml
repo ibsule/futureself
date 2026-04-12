@@ -39,4 +39,4 @@ jobs:
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
             cd ~/deployed_apps/future-self-backend
             docker compose pull future-self-backend
-            docker compose up -d --no-deps app
+            docker compose up -d --no-deps future-self-backend

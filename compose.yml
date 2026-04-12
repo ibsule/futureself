@@ -5,6 +5,6 @@ services:
     container_name: future-self-backend-api
     restart: unless-stopped
     env_file:
-      .env
+      - .env
     ports:
       - 5010:5001
