@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -27,7 +31,13 @@ export class UserService {
     user.email = data.email;
     user.password_hash = await hashString(data.password);
 
-    await this.userRepository.save(user);
+    const saved = await this.userRepository.save(user);
+
+    if (!saved) {
+      throw new UnprocessableEntityException(
+        'failed to add user. please try again.',
+      );
+    }
 
     return {
       message: 'success',
@@ -38,5 +48,4 @@ export class UserService {
       },
     };
   }
-
 }

@@ -19,7 +19,7 @@ export class User {
   @Column({ nullable: true, default: null })
   other_names: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -27,6 +27,9 @@ export class User {
 
   @Column({ default: 1 })
   auth_token_version: number;
+
+  @Column({ default: false })
+  has_verified_email: boolean;
 
   @CreateDateColumn()
   created_at: Date;
