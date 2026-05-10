@@ -37,7 +37,7 @@ export class MessengerService {
 
     if (!onlyOne) {
       throw new BadRequestException(
-        "only provide value for either 'send_at' or 'send_after', not both.",
+        "Only provide value for either 'send_at' or 'send_after', not both.",
       );
     }
 
@@ -64,7 +64,7 @@ export class MessengerService {
 
     if (!savedMessage) {
       throw new UnprocessableEntityException(
-        'failed to create message. please try again.',
+        'Failed to create message. Please try again.',
       );
     }
 
@@ -82,7 +82,7 @@ export class MessengerService {
 
     if (!job) {
       throw new UnprocessableEntityException(
-        'failed to add message. please try again',
+        'Failed to add message. Please try again',
       );
     }
 
@@ -98,7 +98,7 @@ export class MessengerService {
       });
 
       if (!message) {
-        throw new NotFoundException('message with id not found.');
+        throw new NotFoundException('Message with id not found.');
       }
 
       const user = await this.userRepository.findOneBy({
@@ -106,7 +106,7 @@ export class MessengerService {
       });
 
       if (!user) {
-        throw new NotFoundException('user not found.');
+        throw new NotFoundException('User not found.');
       }
 
       const recipientEmail = user.email;
