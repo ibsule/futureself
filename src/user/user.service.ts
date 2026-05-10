@@ -22,7 +22,7 @@ export class UserService {
     });
 
     if (existingUser) {
-      throw new BadRequestException('user with this email already exists.');
+      throw new BadRequestException('User with this email already exists.');
     }
 
     const user = new User();
@@ -35,7 +35,7 @@ export class UserService {
 
     if (!saved) {
       throw new UnprocessableEntityException(
-        'failed to add user. please try again.',
+        'Failed to add user. Please try again.',
       );
     }
 
