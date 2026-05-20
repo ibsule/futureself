@@ -38,6 +38,33 @@
       @apply bg-[#e8e4dc] text-paper-dark;
     }
   }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #121212;
+    -webkit-box-shadow: 0 0 0 1000px #f4f1ea inset;
+    box-shadow: 0 0 0 1000px #f4f1ea inset;
+    transition: background-color 9999s ease-in-out 0s;
+    caret-color: #121212;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus {
+      -webkit-text-fill-color: #e8e4dc;
+      -webkit-box-shadow: 0 0 0 1000px #0c0c0c inset;
+      box-shadow: 0 0 0 1000px #0c0c0c inset;
+      caret-color: #e8e4dc;
+    }
+  }
 }
 
 @layer utilities {
