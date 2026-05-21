@@ -15,6 +15,7 @@ export enum ENVIRONMENT {
 export enum EMAIL_TEMPLATES {
   SIGNIN_MAGIC_LINK = 'signin_magic_link',
   MESSAGE_TO_FUTURE = 'message_to_future',
+  MESSAGE_TO_FUTURE_RELAXED = 'message_to_future_relaxed',
   FORGET_PASSWORD = 'forget_password',
   TEST = 'test',
 }
