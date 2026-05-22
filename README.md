@@ -8,13 +8,14 @@ Users can write a message, choose a delivery date, and let the system handle the
 
 Most reminder apps are built around tasks and notifications. I wanted something more personal: a way to leave notes for myself that arrive at the right time.
 
-Sometimes it’s a reflection I want to revisit months later, a message for an important milestone, encouragement before a difficult period, or just context I know I’ll forget with time. Futureself is built around that idea: delayed personal communication instead of productivity tooling.
+Sometimes it's a reflection I want to revisit months later, a message for an important milestone, encouragement before a difficult period, or just context I know I'll forget with time. Futureself is built around that idea: delayed personal communication instead of productivity tooling.
 
 > **Note** This repository is still in active development
 
 ## Prerequisites
 
 - **Node.js** 22.x or current LTS
+- **pnpm** 9.x (`npm install -g pnpm`)
 - **PostgreSQL** and **Redis** (local install or your own containers)
 - **Brevo** API key only if you want real email (optional locally)
 
@@ -22,15 +23,21 @@ Sometimes it’s a reflection I want to revisit months later, a message for an i
 
 ### 1. Postgres and Redis
 
-Run both on the hosts/ports you’ll put in `.env.local`. Defaults below assume `127.0.0.1`.
+Run both on the hosts/ports you'll put in `.env.local`. Defaults below assume `127.0.0.1`.
 
-### 2. Backend
+### 2. Install dependencies
+
+From the repo root:
 
 ```bash
-npm install
+pnpm install
 ```
 
-Create `.env.local` in the repo root. The app loads `.env.local` first, then `.env.prod` (`[app.module.ts](src/app.module.ts)`). Required keys: `[src/commons/interfaces/env.ts](src/commons/interfaces/env.ts)`.
+This installs dependencies for both `apps/api` and `apps/web` in one shot.
+
+### 3. Backend
+
+Create `.env.local` in `apps/api/`. Required keys: `apps/api/src/commons/interfaces/env.ts`.
 
 ```env
 NODE_ENVIRONMENT=local
@@ -63,21 +70,9 @@ FRONTEND_URL=http://localhost:5173
 - `FRONTEND_URL` must match where the Vite app runs (CORS).
 - Use a strong `APP_KEY` outside local.
 
-```bash
-npm run start:dev
-```
+### 4. Frontend
 
-API listens on `APP_PORT` (log: `Server running on …`).
-
-### 3. Frontend
-
-```bash
-cd frontend
-npm install
-cp .env.example .env
-```
-
-Set `VITE_API_URL` to your API origin (no trailing slash):
+Create `.env` in `apps/web/` (copy from `apps/web/.env.example`):
 
 ```env
 VITE_API_URL=http://localhost:3000
@@ -85,48 +80,37 @@ VITE_API_URL=http://localhost:3000
 
 Must match backend `APP_PORT`.
 
-```bash
-npm run dev
-```
-
-App: [http://localhost:5173](http://localhost:5173) (Vite default in `[frontend/vite.config.ts](frontend/vite.config.ts)`).
-
 ## Local dev
 
-Two terminals:
+Run both from the repo root:
 
+```bash
+pnpm dev          # starts both api and web concurrently
+```
 
-| Terminal | Directory   | Command             |
-| -------- | ----------- | ------------------- |
-| API      | repo root   | `npm run start:dev` |
-| UI       | `frontend/` | `npm run dev`       |
+Or in separate terminals:
 
+| Terminal | Command         |
+| -------- | --------------- |
+| API      | `pnpm dev:api`  |
+| Web      | `pnpm dev:web`  |
+
+App: [http://localhost:5173](http://localhost:5173) — API on port defined in `APP_PORT`.
 
 Register, compose a message, pick a future delivery time. With `DONT_SEND_EMAIL=true`, the queue still runs; email is skipped.
 
 ## Scripts
 
-**API** (repo root)
+All scripts run from the **repo root** via pnpm:
 
-
-| Command              | Purpose               |
-| -------------------- | --------------------- |
-| `npm run start:dev`  | Dev server with watch |
-| `npm run build`      | Production build      |
-| `npm run start:prod` | Run `dist/`           |
-| `npm run lint`       | ESLint                |
-| `npm run test`       | Unit tests            |
-| `npm run test:e2e`   | E2E tests             |
-
-
-**Frontend** (`frontend/`)
-
-
-| Command           | Purpose                        |
-| ----------------- | ------------------------------ |
-| `npm run dev`     | Vite dev server                |
-| `npm run build`   | Typecheck + production build   |
-| `npm run preview` | Serve production build locally |
-| `npm run lint`    | ESLint                         |
-
-
+| Command           | Purpose                              |
+| ----------------- | ------------------------------------ |
+| `pnpm dev`        | Start both api and web               |
+| `pnpm dev:api`    | API dev server with watch            |
+| `pnpm dev:web`    | Vite dev server                      |
+| `pnpm build`      | Production build for both            |
+| `pnpm build:api`  | Production build for api only        |
+| `pnpm build:web`  | Production build for web only        |
+| `pnpm test`       | Run all tests                        |
+| `pnpm lint`       | Lint all packages                    |
+| `pnpm format`     | Format all packages                  |
