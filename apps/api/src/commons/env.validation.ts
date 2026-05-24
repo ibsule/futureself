@@ -82,12 +82,14 @@ class EnvironmentVariables {
   EMAIL_SENDER_NAME: string;
 
   @IsString()
+  @IsOptional()
   EMAIL_SENDER_EMAIL: string;
 
   @IsString()
   BREVO_API_ENDPOINT: string;
 
   @IsString()
+  @IsOptional()
   BREVO_API_KEY: string;
 }
 

@@ -90,12 +90,14 @@ pnpm dev          # starts both api and web concurrently
 
 Or in separate terminals:
 
-| Terminal | Command         |
-| -------- | --------------- |
-| API      | `pnpm dev:api`  |
-| Web      | `pnpm dev:web`  |
 
-App: [http://localhost:5173](http://localhost:5173) — API on port defined in `APP_PORT`.
+| Terminal | Command        |
+| -------- | -------------- |
+| API      | `pnpm dev:api` |
+| Web      | `pnpm dev:web` |
+
+
+App: [http://localhost:5173](http://localhost:5173).
 
 Register, compose a message, pick a future delivery time. With `DONT_SEND_EMAIL=true`, the queue still runs; email is skipped.
 
@@ -103,14 +105,17 @@ Register, compose a message, pick a future delivery time. With `DONT_SEND_EMAIL=
 
 All scripts run from the **repo root** via pnpm:
 
-| Command           | Purpose                              |
-| ----------------- | ------------------------------------ |
-| `pnpm dev`        | Start both api and web               |
-| `pnpm dev:api`    | API dev server with watch            |
-| `pnpm dev:web`    | Vite dev server                      |
-| `pnpm build`      | Production build for both            |
-| `pnpm build:api`  | Production build for api only        |
-| `pnpm build:web`  | Production build for web only        |
-| `pnpm test`       | Run all tests                        |
-| `pnpm lint`       | Lint all packages                    |
-| `pnpm format`     | Format all packages                  |
+
+| Command          | Purpose                       |
+| ---------------- | ----------------------------- |
+| `pnpm dev`       | Start both api and web        |
+| `pnpm dev:api`   | API dev server with watch     |
+| `pnpm dev:web`   | Vite dev server               |
+| `pnpm build`     | Production build for both     |
+| `pnpm build:api` | Production build for api only |
+| `pnpm build:web` | Production build for web only |
+| `pnpm test`      | Run all tests                 |
+| `pnpm lint`      | Lint all packages             |
+| `pnpm format`    | Format all packages           |
+
+

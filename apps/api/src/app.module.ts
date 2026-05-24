@@ -20,7 +20,7 @@ import { validate } from './commons/env.validation';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env.api.local', '.env.api.prod'],
+      envFilePath: ['../../.env'],
       validate
     }),
     TypeOrmModule.forRootAsync({
